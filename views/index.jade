@@ -27,33 +27,25 @@ block content
               td Current level:
               td(id="data_bandwidth")
             tr
-              td Fragment events:
-              td(id="data_fragevents")
-            tr
               td Loaded fragment:
               td(id="data_fragment")
             tr
-              td(rowspan="5") Media data:
-              td(id="data_media_codec") n/a
-            tr
-              td(id="data_video_moof") n/a
-            tr
-              td(id="data_video_mdat") n/a
-            tr
-              td(id="data_audio_moof") n/a
-            tr
-              td(id="data_audio_mdat") n/a
+              td Player stats:
+              td(id="data_player")
             tr
               td QoS events:
               td(id="data_qualityevents")
             tr
               td Last error:
               td(id="data_error") No error
+            tr
+              td Last (10) stream changes:
+              td(id="data_switch")
       div(id="playercontrols")
         label(for="level") Quality level 
         select(id="level", name="level")
         button(type="button", onClick="toggleOverlay()", disabled="1") Show/Hide Overlay
-        button(type="button", onClick="toggleMetrics()", disabled="1") Show/Hide Metrics
+        button(type="button", onClick="toggleMetrics()") Show/Hide Metrics
     div(id="realtimemetrics")
       canvas(id="canvas_fragments", height="200", width="1000")
       canvas(id="canvas_pipeline", height="200", width="1000")
@@ -62,5 +54,6 @@ block content
   
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
   script(type="text/javascript" src="javascripts/shaka-player.compiled.js")
+  script(type="text/javascript" src="javascripts/canvas-update.js")
   script(type="text/javascript" src="javascripts/html5-player.js")
 

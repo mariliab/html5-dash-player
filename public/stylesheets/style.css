@@ -64,6 +64,9 @@ h1 {
 }
 
 #data_fragment {
+}
+
+#data_player {
   height: 40px;
 }
 
@@ -103,7 +106,6 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   width: 1000px;
-  display: none;
 }
 
 #canvas_fragments {
@@ -116,10 +118,12 @@ h1 {
   width: 1000px;
   height: 200px;
   border: 1px solid #000000;
+  display: none;
 }
 
 #canvas_bandwidth {
   width: 1000px;
   height: 200px;
   border: 1px solid #000000;
+  display: none;
 }
