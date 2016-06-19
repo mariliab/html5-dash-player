@@ -1,0 +1,125 @@
+@font-face {
+  font-family: LevelOne;
+  src: url('../fonts/LevelOne.woff');
+}
+
+html, body {
+  font: 14px LevelOne, "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-image: url('../images/bg-light.jpg');
+  background-repeat: no-repeat;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.small {
+  font-size; 10px;
+}
+
+.tiny {
+  font: 8px Arial;
+}
+
+.tinytable {
+  font: 8px Arial;
+}
+
+.tinytable td {
+  vertical-align: top;
+}
+
+.logo {
+  width: 180px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+#wrapper {
+  min-height: 100%;
+  position: relative;
+}         
+      
+#content {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#logosection {
+  padding-top: 20px;
+}
+
+#playbackdata {
+  text-align: left;
+  height: 405px;
+  color: white;
+}
+
+#data_fragment {
+  height: 40px;
+}
+
+#playercontrols {
+  text-align: left;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+#videocontent {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
+  background-color: black;
+}
+
+#video-container {
+  max-width: 720px;
+  float: left;
+}
+
+#textoverlay {
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.5);
+  height: 70px;
+  width: 500px;
+  top: 500px;
+  display: none;
+  color: white;
+  font: 12px Arial;
+  text-align: left;
+  padding-left: 20px;
+}
+
+#realtimemetrics {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  display: none;
+}
+
+#canvas_fragments {
+  width: 1000px;
+  height: 200px;
+  border: 1px solid #000000;
+}
+
+#canvas_pipeline {
+  width: 1000px;
+  height: 200px;
+  border: 1px solid #000000;
+}
+
+#canvas_bandwidth {
+  width: 1000px;
+  height: 200px;
+  border: 1px solid #000000;
+}
