@@ -1,7 +1,20 @@
+jQuery.extend({
+  getQueryParameters : function(str) {
+    return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+  }
+});
+
 $(document).ready(function() { 
   initApp(); 
+  var params = $.getQueryParameters();
   if (shaka.Player.isBrowserSupported()) {
-    playVideo(false); 
+    if (params.drm) {
+      $('#manifestUrl').val('https://amssamples.streaming.mediaservices.windows.net/622b189f-ec39-43f2-93a2-201ac4e31ce1/BigBuckBunny.ism/manifest(format=mpd-time-csf)');
+      $('#laUrl').val('https://amssamples.keydelivery.mediaservices.windows.net/Widevine/?KID=1ab45440-532c-4399-94dc-5c5ad9584bac');
+    }
+    if (params.auto) {
+      playVideo(false); 
+    }
   } else {
     showErrorMsg('Your browser is not supported!');
     console.error('Browser not supported!');
@@ -37,12 +50,14 @@ function initApp() {
 
 function playVideo(dodebug) {
   source = $('#manifestUrl').val();
+  var laurl = $('#laUrl').val();
+
   if(source) {
-    play(source, dodebug);
+    play(source, laurl, dodebug);
   }
 }
 
-function play(videosrc, debug) {
+function play(videosrc, laurl, debug) {
   player = document.getElementById('video-container');
   var shakap = new shaka.Player(player);
   STATS.ts = Date.now();
@@ -50,6 +65,18 @@ function play(videosrc, debug) {
   STATS.qosevents = [];
   STATS.fragIdx = 0;
   STATS.fragments = {};
+
+  if (laurl) {
+    console.log("Configure to use DRM: " + laurl);
+    shakap.configure({
+      drm: {
+        servers: {
+          'com.widevine.alpha': laurl,
+          'com.microsoft.playready': laurl
+        }
+      }
+    });
+  }
 
   shakap.addEventListener('error', onShakaErrorEvent);
 
@@ -88,6 +115,8 @@ function onRequestFilter(type, request) {
       reqts: performance.now()
     };
     STATS.fragments[request.uris[0]] = fragment;
+  } else if (type === shaka.net.NetworkingEngine.RequestType.LICENSE) {
+    $('#data_drm').html("Issuing DRM license request");
   }
 }
 
@@ -103,6 +132,11 @@ function onResponseFilter(type, response) {
       STATS.list[fragment.idx] = fragment;
     }
   } else if (type === shaka.net.NetworkingEngine.RequestType.MANIFEST) {
+  } else if (type === shaka.net.NetworkingEngine.RequestType.LICENSE) {
+    $('#data_drm').html("DRM license received ("+response.data.byteLength+" bytes)");
+    $('#drmdata').css('display', 'block');
+    var license = btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
+    $('#licenseData').val(license);
   }
 }
 
@@ -141,6 +175,12 @@ function updateStats(shakap) {
     qoseventshtml = qoseventshtml + Math.round(qos.ts) + " [" + qos.type + "]: " + qos.msg + "<br>";
   }
   $('#data_qualityevents_history').html(qoseventshtml);
+
+  var drmInfo = shakap.drmInfo();
+  if (drmInfo) {
+    var drminfohtml = "Key System: " + drmInfo.keySystem + "<br>";
+    $('#data_drm_info').html(drminfohtml);
+  }
 }
 
 function getCurrentVideoTrack(shakap) {
@@ -218,7 +258,7 @@ function onShakaError(error) {
         showErrorMsg("No license server was given for the key system signaled by the manifest.");
         break;
       default:
-        showErrorMsg("A DRM problem occurred");
+        showErrorMsg("A DRM problem occurred ("+error.code+")");
         break;
     }
   }

@@ -20,44 +20,50 @@ block content
         div(id="playbackdata")
           table.tinytable
             tr
-              td Based on:
+              td.label Based on:
               td(id="data_version") 
             tr
-              td Quality levels:
+              td.label Quality levels:
               td(id="data_qualitylevels")  
             tr
-              td Current level:
+              td.label Current level:
               td(id="data_bandwidth")
             tr
-              td Loaded fragment:
+              td.label Loaded fragment:
               td(id="data_fragment")
             tr
-              td Player stats:
+              td.label Player stats:
               td(id="data_player")
             tr
-              td DRM info:
+              td.label DRM events:
               td(id="data_drm")
             tr
-              td QoS events:
+              td.label DRM info:
+              td(id="data_drm_info")
+            tr
+              td.label QoS events:
               td(id="data_qualityevents")
             tr
-              td Last (10) QoS events:
+              td.label Last (10) QoS events:
               td(id="data_qualityevents_history")
             tr
-              td Last error:
+              td.label Last error:
               td(id="data_error") No error
             tr
-              td Last (10) stream changes:
+              td.label Last (10) switches:
               td(id="data_switch")
              
-      div(id="drm")
-        label(for="laurl") License Acquisition URI
-        input(id="laurl", size="100", type="text", name="laUrl")
       div(id="playercontrols")
         label(for="level") Quality level 
         select(id="level", name="level")
         button(type="button", onClick="toggleOverlay()", disabled="1") Show/Hide Overlay
         button(type="button", onClick="toggleMetrics()") Show/Hide Metrics
+      div(id="drm")
+        label(for="laUrl") License Acquisition URI
+        input(id="laUrl", size="100", type="text", name="laUrl")
+    div(id="drmdata")
+      p License payload (base64 encoded)
+      textarea(id="licenseData", readonly="1", type="text", rows="8", cols="150", name="licenseData") 
     div(id="realtimemetrics")
       canvas(id="canvas_fragments", height="200", width="1000")
       canvas(id="canvas_pipeline", height="200", width="1000")

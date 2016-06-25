@@ -32,6 +32,10 @@ a {
   vertical-align: top;
 }
 
+.label {
+  width: 80px;
+}
+
 .logo {
   width: 180px;
   display: block;
@@ -64,6 +68,7 @@ h1 {
 }
 
 #data_fragment {
+  height: 20px;
 }
 
 #data_player {
@@ -144,5 +149,12 @@ h1 {
   width: 1000px;
   height: 200px;
   border: 1px solid #000000;
+  display: none;
+}
+
+#drmdata {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
   display: none;
 }
