@@ -76,6 +76,12 @@ h1 {
   margin: 0 auto;
 }
 
+#drm {
+  text-align: left;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
 #videocontent {
   margin-left: auto;
   margin-right: auto;
@@ -100,6 +106,19 @@ h1 {
   font: 12px Arial;
   text-align: left;
   padding-left: 20px;
+}
+
+#errorbox {
+  position: absolute;
+  z-index: 12;
+  background-color: rgba(128, 0, 0, 0.5);
+  margin-top: 140px;
+  height: 80px;
+  width: 720px;
+  display: none;
+  color: white;
+  font: 16px Arial;
+  text-align: center;
 }
 
 #realtimemetrics {

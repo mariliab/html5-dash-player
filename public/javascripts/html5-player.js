@@ -3,6 +3,7 @@ $(document).ready(function() {
   if (shaka.Player.isBrowserSupported()) {
     playVideo(false); 
   } else {
+    showErrorMsg('Your browser is not supported!');
     console.error('Browser not supported!');
   }
 });
@@ -12,6 +13,21 @@ var STATS = {
   fragments: {},
   list: []
 };
+
+function showErrorMsg(msg) {
+  $('#errormsg').html(msg);
+  var errorbox = $('#errorbox');
+  errorbox.css("display", "block");
+}
+
+function toggleMetrics() {
+  var metrics = $('#realtimemetrics');
+  if(metrics.css("display") == "none") {
+    metrics.css("display", "block");
+  } else {
+    metrics.css("display", "none");
+  }
+}
 
 function initApp() {
   shaka.polyfill.installAll();
