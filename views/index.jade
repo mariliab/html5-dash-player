@@ -35,14 +35,21 @@ block content
               td Player stats:
               td(id="data_player")
             tr
+              td DRM info:
+              td(id="data_drm")
+            tr
               td QoS events:
               td(id="data_qualityevents")
+            tr
+              td Last (10) QoS events:
+              td(id="data_qualityevents_history")
             tr
               td Last error:
               td(id="data_error") No error
             tr
               td Last (10) stream changes:
               td(id="data_switch")
+             
       div(id="drm")
         label(for="laurl") License Acquisition URI
         input(id="laurl", size="100", type="text", name="laUrl")

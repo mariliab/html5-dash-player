@@ -11,7 +11,8 @@ var source, player;
 var STATS = {
   fragIdx: 0,
   fragments: {},
-  list: []
+  list: [],
+  qosevents: []
 };
 
 function showErrorMsg(msg) {
@@ -45,6 +46,10 @@ function play(videosrc, debug) {
   player = document.getElementById('video-container');
   var shakap = new shaka.Player(player);
   STATS.ts = Date.now();
+  STATS.list = [];
+  STATS.qosevents = [];
+  STATS.fragIdx = 0;
+  STATS.fragments = {};
 
   shakap.addEventListener('error', onShakaErrorEvent);
 
@@ -126,6 +131,16 @@ function updateStats(shakap) {
     }
   }
   $('#data_switch').html(switcheshtml);
+
+  var qoseventshtml = '';
+  if (STATS.qosevents.length > 10) {
+    s = STATS.qosevents.length - 10;
+  }
+  for (var i=s; i<STATS.qosevents.length; i++) {
+    var qos = STATS.qosevents[i];
+    qoseventshtml = qoseventshtml + Math.round(qos.ts) + " [" + qos.type + "]: " + qos.msg + "<br>";
+  }
+  $('#data_qualityevents_history').html(qoseventshtml);
 }
 
 function getCurrentVideoTrack(shakap) {
@@ -181,7 +196,9 @@ function onQoSEvent(event) {
   qosevents['error'] = "Error occured while loading video";
   qosevents['playing'] = "Playback resumed following paused or download delay";
   qosevents['ratechange'] = "Playback rate has changed";
+  qosevents['canplaythrough'] = "Enough data exists for playback";
   $('#data_qualityevents').html(qosevents[event.type]);
+  STATS.qosevents.push({ ts: performance.now(), type: event.type, msg: qosevents[event.type] });
 }
 
 function onShakaError(error) {
@@ -195,6 +212,16 @@ function onShakaError(error) {
   }
   var errmsg = 'Shaka Error ' + codeName;
   $('#data_error').html(errmsg);
+  if (error.code >= 6000 && error.code < 7000) {
+    switch(error.code) {
+      case 6012:
+        showErrorMsg("No license server was given for the key system signaled by the manifest.");
+        break;
+      default:
+        showErrorMsg("A DRM problem occurred");
+        break;
+    }
+  }
 }
 
 function onShakaErrorEvent(event) {
