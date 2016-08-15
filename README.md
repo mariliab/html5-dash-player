@@ -1,11 +1,17 @@
 # html5-dash-player
 
-Ladda ned och installera https://nodejs.org/en/download/
+Download and install https://nodejs.org/en/download/
 
-Kör sedan följande i html-dash katalogen: 
+Run the following from the command line: 
 
-    npm install -g n 
+    npm install -g n
 
-    npm start 
+Run the following inside the html-dash directory: 
 
-Detta sätter upp en server som kan nås på localhost:3000
+    npm install 
+
+    npm start
+    
+This will create a server running at localhost:3000
+
+
