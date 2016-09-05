@@ -6,8 +6,8 @@ block content
       a(href="http://www.eyevinntechnology.se", border="0")
         img.logo(src='images/eyevinn-technology-700px-transparent.png')      
     div(id="content")
-      h1 HTML5 DASH Player 
-      input(id="manifestUrl", size="100", type="text", name="manifestUrl", value="http://www.bok.net/dash/tears_of_steel/cleartext/stream.mpd")
+      h1 HTML5 DASH Player
+      input(id="manifestUrl", size="50", type="text", name="manifestUrl", value="http://www.bok.net/dash/tears_of_steel/cleartext/stream.mpd")
       button(type="button", onClick="playVideo(false)") Play
       button(type="button", onClick="playVideo(true)") Debug
       div(id="videocontent")
@@ -59,8 +59,8 @@ block content
         button(type="button", onClick="toggleOverlay()", disabled="1") Show/Hide Overlay
         button(type="button", onClick="toggleMetrics()") Show/Hide Metrics
       div(id="drm")
-        label(for="laUrl") License Acquisition URI
-        input(id="laUrl", size="100", type="text", name="laUrl")
+        label(for="laUrl") License Acquisition URI 
+        input(id="laUrl", size="25", type="text", name="laUrl")
     div(id="drmdata")
       p License payload (base64 encoded)
       textarea(id="licenseData", readonly="1", type="text", rows="8", cols="150", name="licenseData") 
