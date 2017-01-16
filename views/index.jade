@@ -1,73 +1,91 @@
 extends layout
 
 block content
-  div(id="wrapper")
-    div(id="logosection")
-      a(href="http://www.eyevinntechnology.se", border="0")
-        img.logo(src='images/eyevinn-technology-700px-transparent.png')      
-    div(id="content")
-      h1 HTML5 DASH Player 
-      input(id="manifestUrl", size="100", type="text", name="manifestUrl", value="http://www.bok.net/dash/tears_of_steel/cleartext/stream.mpd")
-      button(type="button", onClick="playVideo(false)") Play
-      button(type="button", onClick="playVideo(true)") Debug
-      div(id="videocontent")
-        video(id="video-container", class="video-js vjs-default-skin", style="width: 720px; height: 405px", controls="1")
-        div(id="textoverlay")
-          div(id="overlay_timedata")
-          div(id="overlay_ptsdata")
-        div(id="errorbox")
-          p(id="errormsg")
-        div(id="playbackdata")
-          table.tinytable
-            tr
-              td.label Based on:
-              td(id="data_version") 
-            tr
-              td.label Quality levels:
-              td(id="data_qualitylevels")  
-            tr
-              td.label Current level:
-              td(id="data_bandwidth")
-            tr
-              td.label Loaded fragment:
-              td(id="data_fragment")
-            tr
-              td.label Player stats:
-              td(id="data_player")
-            tr
-              td.label DRM events:
-              td(id="data_drm")
-            tr
-              td.label DRM info:
-              td(id="data_drm_info")
-            tr
-              td.label QoS events:
-              td(id="data_qualityevents")
-            tr
-              td.label Last (10) QoS events:
-              td(id="data_qualityevents_history")
-            tr
-              td.label Last error:
-              td(id="data_error") No error
-            tr
-              td.label Last (10) switches:
-              td(id="data_switch")
-             
-      div(id="playercontrols")
-        label(for="level") Quality level 
-        select(id="level", name="level")
-        button(type="button", onClick="toggleOverlay()", disabled="1") Show/Hide Overlay
-        button(type="button", onClick="toggleMetrics()") Show/Hide Metrics
-      div(id="drm")
-        label(for="laUrl") License Acquisition URI
-        input(id="laUrl", size="100", type="text", name="laUrl")
-    div(id="drmdata")
-      p License payload (base64 encoded)
-      textarea(id="licenseData", readonly="1", type="text", rows="8", cols="150", name="licenseData") 
-    div(id="realtimemetrics")
-      canvas(id="canvas_fragments", height="200", width="1000")
-      canvas(id="canvas_pipeline", height="200", width="1000")
-      canvas(id="canvas_bandwidth", height="200", width="1000")
+  div(id="wrapper")     
+    div(id="content",class="eyeVinn")
+      div(id="header")
+        div(id="heading")
+          h1.deepshadow HTML5 DASH Player 
+        div(id="logosection")
+          a(href="http://www.eyevinntechnology.se", border="0")
+          img.logo(src='images/eyevinn-technology-logo-white.png') 
+      div(id="videocanvas")    
+        div(id="videocontent")
+          .controlButtons1
+            input(id="manifestUrl", type="text", name="manifestUrl", value="http://www.bok.net/dash/tears_of_steel/cleartext/stream.mpd")
+            button(id="firstPlay", volume="0.5", type="button", onClick="playVideo(false)") Play
+            button(id="debug", type="button", onClick="playVideo(true)") Debug
+          video(id="video-container", class="video-js vjs-default-skin", style="width: 720px; height: 405px")
+          div(id="textoverlay")
+            div(id="overlay_timedata")
+            div(id="overlay_ptsdata")
+          div(id="errorbox")
+            p(id="errormsg")
+          div(id="playbackdata")
+            table.tinytable
+              tr
+                td.label Based on:
+                td(id="data_version") 
+              tr
+                td.label Quality levels:
+                td(id="data_qualitylevels")  
+              tr
+                td.label Current level:
+                td(id="data_bandwidth")
+              tr
+                td.label Loaded fragment:
+                td(id="data_fragment")
+              tr
+                td.label Player stats:
+                td(id="data_player")
+              tr
+                td.label DRM events:
+                td(id="data_drm")
+              tr
+                td.label DRM info:
+                td(id="data_drm_info")
+              tr
+                td.label QoS events:
+                td(id="data_qualityevents")
+              tr
+                td.label Last (10) QoS events:
+                td(id="data_qualityevents_history")
+              tr
+                td.label Last error:
+                td(id="data_error") No error
+              tr
+                td.label Last (10) switches:
+                td(id="data_switch")    
+          #controlButtons
+            button#start.buttons
+              span.glyphicon.glyphicon-play
+            button#plus.buttons
+              span.glyphicon.glyphicon-volume-up
+            button#minus.buttons
+              span.glyphicon.glyphicon-volume-down
+            button#mute.buttons
+              span.glyphicon.glyphicon-volume-off
+            button#fullScreen.buttons
+              span.glyphicon.glyphicon-fullscreen
+            #progressBar
+              #loadingProgress
+            #duration
+
+        div#extra       
+          div(id="playercontrols")
+            label(for="level") Quality level 
+            select(id="level", name="level")
+            button(id="overlayButton", class="buttons", type="button", onClick="toggleOverlay()", disabled="1") Show/Hide Overlay
+            button(id="metricsButton", class="buttons", type="button", onClick="toggleMetrics()") Show/Hide Metrics
+          div(id="drm")
+            input(id="laUrl", type="text", name="laUrl", placeholder='License Acquisition URI')
+          div(id="drmdata")
+            p License payload (base64 encoded)
+            textarea(id="licenseData", readonly="1", type="text", rows="8", cols="150", name="licenseData") 
+          div(id="realtimemetrics")
+            canvas(id="canvas_fragments", height="200", width="1114")
+            canvas(id="canvas_pipeline", height="200", width="1114")
+            canvas(id="canvas_bandwidth", height="200", width="1114")
     div(id="footer")
   
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')

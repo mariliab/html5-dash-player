@@ -275,3 +275,146 @@ function onShakaPlayerEvent(event) {
   } else if (event.type === 'buffering') {
   }
 }
+/***********************************************/
+var playButton = document.getElementById('start');
+var stopButton = document.getElementById('stop');
+var volumeUpButton = document.getElementById('plus');
+var volumeDownButton = document.getElementById('minus');
+var muteButton = document.getElementById('mute');
+var fullScreenButton = document.getElementById('fullScreen');
+var isPlaying = false;
+var isMuted = false;
+var timeDrag = false;
+
+var videoPlayer = document.getElementById('video-container');
+var lastVolume = videoPlayer.volume;
+var thisDuration; //videoPlayer.duration;
+var currentTime = videoPlayer.currentTime;
+
+var loadingProgress = document.getElementById('loadingProgress');
+
+var currentTimeCounter = setInterval(function(){ getCurrentTime() }, 500);
+
+videoPlayer.onloadedmetadata = function() {
+    thisDuration = videoPlayer.duration;
+    console.log("DURATION: " + thisDuration);
+    //$('#duration').innerHTML(thisDuration);
+
+};
+function getCurrentTime(){
+  currentTime = videoPlayer.currentTime;
+  var pointOnProgressBar = (currentTime/thisDuration)*100;
+  /*console.log("Duration: " + thisDuration);*/
+  loadingProgress.style.width = pointOnProgressBar+'%';
+}
+
+function togglePlay() {
+  if (isPlaying) {
+    videoPlayer.pause()
+    //playButton.innerHTML='Pause';
+    //playButton.style.backgroundColor = '#91D7F3';
+
+  } else {
+    videoPlayer.play();
+    //playButton.innerHTML='Play';
+    //playButton.style.backgroundColor = '#C9EAF8';
+  }
+};
+videoPlayer.onplaying = function() {
+  isPlaying = true;
+};
+videoPlayer.onpause = function() {
+  isPlaying = false;
+};
+
+playButton.onclick = function(){ 
+  /*playButton.find('span').toggleClass('glyphicon-pause glyphicon-play');*/
+  $("#start").find('span').toggleClass('glyphicon-pause glyphicon-play');
+  togglePlay();
+}
+
+function mouseDown(){
+  /*
+  var x = $(this).find('glyphicon');
+    x.css('font-size','10em');
+    console.log(x);
+    */
+
+}
+
+function toggleMute() {
+  if (isMuted==true) {
+    videoPlayer.volume = lastVolume;
+    isMuted = false;
+
+  } else {
+    lastVolume = videoPlayer.volume;
+    videoPlayer.volume = 0;
+    isMuted = true;
+  }
+};
+
+muteButton.onclick = function(){
+  toggleMute();
+}
+
+volumeUpButton.onclick = function(){
+  videoPlayer.volume += 0.05;
+}
+volumeDownButton.onclick = function(){
+  videoPlayer.volume -= 0.05;
+}
+
+fullScreenButton.onclick = function(){
+  videoPlayer.requestFullscreen();
+}
+//update Progress Bar control
+var updateLoadingProgress = function(x) {
+    var progress = $('#progressBar');
+    //var maxduration = video[0].duration; //Video duraiton
+    var position = x - progress.offset().left; //Click pos
+    console.log("POSITION: " + position);
+    var percentage = 100 * position / progress.width();
+ 
+    //Check within range
+    if(percentage > 100) {
+        percentage = 100;
+    }
+    if(percentage < 0) {
+        percentage = 0;
+    }
+ 
+    //Update progress bar and video currenttime
+    $('#loadingProgress').css('width', percentage+'%');
+    videoPlayer.currentTime = thisDuration * percentage / 100;
+};
+
+$(document).mouseup(function(e) {
+    if(timeDrag) {
+        timeDrag = false;
+        updateLoadingProgress(e.pageX);
+    }
+});
+
+//When clicking on progressbar
+$('#progressBar').mousedown(function(e) {
+    timeDrag = true;
+    console.log(timeDrag);
+    updateLoadingProgress(e.pageX);
+});
+$(document).mousemove(function(e) {
+    if(timeDrag) {
+        updateLoadingProgress(e.pageX);
+    }
+});
+
+/*function clickedButton() {
+}
+*/
+
+
+
+ 
+
+
+

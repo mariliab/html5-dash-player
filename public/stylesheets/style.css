@@ -4,7 +4,7 @@
 }
 
 html, body {
-  font: 14px LevelOne, "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px LevelOne, "Lucida Grande", Helvetica, Arial, sans-serif !important;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -14,6 +14,9 @@ html, body {
 
 a {
   color: #00B7FF;
+}
+tr {
+  text-align: justify-all;
 }
 
 .small {
@@ -25,7 +28,7 @@ a {
 }
 
 .tinytable {
-  font: 8px Arial;
+  font: 0.75em Arial;
 }
 
 .tinytable td {
@@ -34,17 +37,52 @@ a {
 
 .label {
   width: 80px;
+  font-size: 100% !important;
 }
 
 .logo {
-  width: 180px;
-  display: block;
-  margin: 0 auto;
-  margin-top: 5px;
+  width: 150px;
+}
+
+#logosection {
+  float: right;
+  padding: 5px;
+  margin: 10px;
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 4em !important;
+}
+
+#header {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+#heading {
+  float: left;
+  width: 70%;
+}
+
+#heading h1 {
+    color: #F4FCFE;
+    text-align: center;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+    margin-top: 10px !important;
+}
+    
+.deepshadow {
+  font-family: LevelOne;
+  color: #e0dfdc;
+  letter-spacing: .1em;
+  text-shadow: 
+    0 -1px 0 #fff, 
+    0 1px 0 #2e2e2e, 
+    0 2px 0 #2c2c2c, 
+    0 3px 0 #2a2a2a,  
+    0 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 #wrapper {
@@ -53,12 +91,8 @@ h1 {
 }         
       
 #content {
-  text-align: center;
+  text-align: none;
   padding-bottom: 20px;
-}
-
-#logosection {
-  padding-top: 20px;
 }
 
 #playbackdata {
@@ -76,25 +110,37 @@ h1 {
 }
 
 #playercontrols {
+  padding-left: 10px;
+  clear: left;
   text-align: left;
   max-width: 90%;
-  margin: 0 auto;
+}
+
+#playercontrols label {
+  padding: 10px;
 }
 
 #drm {
+  padding-left: 10px;
   text-align: left;
-  max-width: 90%;
-  margin: 0 auto;
+  margin-left: -10px;
 }
 
 #videocontent {
   margin-left: auto;
   margin-right: auto;
   max-width: 90%;
-  background-color: black;
+  background-color: #000000;
+  position: relative;
+}
+
+#videocanvas {
+  background-color: #FFFFFF;
+  border-radius: 10px;
 }
 
 #video-container {
+  /*position: relative;*/
   max-width: 720px;
   float: left;
 }
@@ -123,38 +169,157 @@ h1 {
   display: none;
   color: white;
   font: 16px Arial;
-  text-align: center;
+  /*text-align: center;*/
 }
 
 #realtimemetrics {
-  margin-left: auto;
-  margin-right: auto;
-  width: 1000px;
+  padding: 10px;
+  width: 1114px;
 }
 
 #canvas_fragments {
-  width: 1000px;
+  width: 1114px;
   height: 200px;
   border: 1px solid #000000;
+  border-radius: 10px;
+}
+#extra {
+  padding: 63px;
+  padding-top: 80px;
 }
 
 #canvas_pipeline {
-  width: 1000px;
+  width: 1114px;
   height: 200px;
   border: 1px solid #000000;
   display: none;
 }
 
 #canvas_bandwidth {
-  width: 1000px;
+  width: 1114px;
   height: 200px;
   border: 1px solid #000000;
   display: none;
 }
 
 #drmdata {
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
-  width: 1000px;
+  padding-left: 15px; 
+  width: 1114px;
   display: none;
+}
+/************/
+/*
+Eyevinn färger #2EBCED, #4EC3EE, #91D7F3, #C9EAF8, #EFF6FB*/
+.eyeVinn {
+  background-color: rgba(0,0,0,0.6);
+  padding: 10px;
+}
+
+#controlButtons{
+  z-index: 10;
+  position: absolute;/*
+  text-align: initial;*/
+  padding: 10px;
+  background-color: white;
+  /*verflow: auto;*/
+  width: 720px;
+}
+
+.controlButtons1{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  /*overflow: auto;*/)
+}
+
+.glyphicon {
+  font-size: 1.5em;
+  vertical-align: middle;
+  text-align: center;
+  color: rgba(0,0,0,0.7);
+}
+
+button:active .glyphicon{
+  /*font-size: 2em;
+  */
+  color: rgba(255,255,255,1);
+}
+
+#start, #stop, #pause, #plus, #minus, #mute, #firstPlay, #debug, #fullScreen, #overlayButton, #metricsButton{
+  float: left;
+  padding: 10px;
+  margin: 1px;
+  font-size: 15px;
+  border-color: rgba(0,0,0,0.7);
+  border-style: solid;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+}
+
+#laUrl, #level {
+  text-align: center;
+  margin: 10px;   
+  background-color: rgba(0,0,0,0.05);
+  height: 30px;
+  border-radius: 10px;
+}
+#laUrl, #manifestUrl {
+  width: 550px;
+  border-color: rgba(0,0,0,0.4);
+}
+#level {
+  width: 175px;
+  border-radius: 10px;
+}
+#controlButtons button:hover {
+  background-color: rgba(0,0,0,0.2);
+}
+.controlButtons1 button:hover {
+  background-color: rgba(0,0,0,0.2);
+}
+#extra button:hover {
+  background-color: rgba(0,0,0,0.2);
+}
+
+#firstPlay, #debug {
+  float: initial;
+}
+
+#start:hover {
+  background-color: rgba(0,0,0,0.2);
+}
+
+#progressBar {
+  border-style: solid;
+  border-radius: 5px;
+  border-color: rgba(0,0,0,0.6);
+  border-width: 2px;
+  position: relative;
+  margin: 10px;
+  padding: 10px;
+  background-color: rgba(0,0,0,0.05);
+  float: left;
+  width: 300px;
+  height: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#loadingProgress {
+  position: absolute;
+  width: 0;
+  top: 0;
+  left: 0;
+  height: inherit;
+  background-color: #2EBCED;
+}
+
+#manifestUrl{
+  /*text-align: center;*/
+  margin: 10px;
+  background-color: rgba(0,0,0,0.05);
+  height: 30px;
+  border-radius: 10px;
 }
