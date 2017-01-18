@@ -204,7 +204,7 @@ function initQualitySelector(shakap) {
 
   shakap.getTracks().sort(function(a,b) {return a.height - b.height;} ).forEach(function(track) {
     if (track.type === "video" && track.active === false) {
-      var option = $('<option></option').attr('value', track.id).text(track.width + "x" + track.height + " ("+Math.round(track.bandwidth/1000)+" kbps)");
+      var option = $('<option></option').attr('value', track.id).text(track.width + "x" + track.height + " "+track.frameRate+"fps ("+Math.round(track.bandwidth/1000)+" kbps)");
       sel.append(option);
       quality_html = quality_html + track.width + "x" + track.height + " ("+Math.round(track.bandwidth/1000) +" kbps)<br>";
     }
