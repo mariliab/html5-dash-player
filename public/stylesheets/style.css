@@ -110,7 +110,6 @@ h1 {
 }
 
 #playercontrols {
-  padding-left: 10px;
   clear: left;
   text-align: left;
   max-width: 90%;
@@ -122,14 +121,13 @@ h1 {
 
 #drm {
   padding-left: 10px;
+  padding-bottom: 10px;
   text-align: left;
   margin-left: -10px;
 }
 
 #videocontent {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 90%;
+  margin: 25px;
   background-color: #000000;
   position: relative;
 }
@@ -137,6 +135,7 @@ h1 {
 #videocanvas {
   background-color: #FFFFFF;
   border-radius: 10px;
+  margin-top: -25px;
 }
 
 #video-container {
@@ -173,7 +172,6 @@ h1 {
 }
 
 #realtimemetrics {
-  padding: 10px;
   width: 1114px;
 }
 
@@ -184,8 +182,8 @@ h1 {
   border-radius: 10px;
 }
 #extra {
-  padding: 63px;
-  padding-top: 80px;
+  padding: 25px;
+  padding-top: 60px;
 }
 
 #canvas_pipeline {
@@ -216,13 +214,13 @@ Eyevinn färger #2EBCED, #4EC3EE, #91D7F3, #C9EAF8, #EFF6FB*/
 .eyeVinn {
   background-color: rgba(0,0,0,0.6);
   padding: 10px;
+  margin-right: 10px;
 }
 
 #controlButtons{
   z-index: 10;
-  position: absolute;/*
-  text-align: initial;*/
-  padding: 10px;
+  position: absolute;
+  padding-top: 10px;/*
   background-color: white;
   /*verflow: auto;*/
   width: 720px;
@@ -231,6 +229,7 @@ Eyevinn färger #2EBCED, #4EC3EE, #91D7F3, #C9EAF8, #EFF6FB*/
 .controlButtons1{
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-left: -10px;
   background-color: white;
   /*overflow: auto;*/)
 }
@@ -261,7 +260,8 @@ button:active .glyphicon{
 
 #laUrl, #level {
   text-align: center;
-  margin: 10px;   
+  margin-top: 10px;
+  margin-bottom: 10px;   
   background-color: rgba(0,0,0,0.05);
   height: 30px;
   border-radius: 10px;
@@ -271,7 +271,7 @@ button:active .glyphicon{
   border-color: rgba(0,0,0,0.4);
 }
 #level {
-  width: 175px;
+  width: 190px;
   border-radius: 10px;
 }
 #controlButtons button:hover {
@@ -281,6 +281,12 @@ button:active .glyphicon{
   background-color: rgba(0,0,0,0.2);
 }
 #extra button:hover {
+  background-color: rgba(0,0,0,0.2);
+}
+#firstPlay:hover{
+  background-color: rgba(0,0,0,0.2);
+}
+#debug:hover{
   background-color: rgba(0,0,0,0.2);
 }
 
@@ -316,8 +322,14 @@ button:active .glyphicon{
   background-color: #2EBCED;
 }
 
+#countDown {
+  padding: 25px;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
 #manifestUrl{
-  /*text-align: center;*/
+  text-align: center;
   margin: 10px;
   background-color: rgba(0,0,0,0.05);
   height: 30px;

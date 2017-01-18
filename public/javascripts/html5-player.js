@@ -275,7 +275,7 @@ function onShakaPlayerEvent(event) {
   } else if (event.type === 'buffering') {
   }
 }
-/***********************************************/
+/* code for custom video controllers */
 var playButton = document.getElementById('start');
 var stopButton = document.getElementById('stop');
 var volumeUpButton = document.getElementById('plus');
@@ -297,27 +297,20 @@ var currentTimeCounter = setInterval(function(){ getCurrentTime() }, 500);
 
 videoPlayer.onloadedmetadata = function() {
     thisDuration = videoPlayer.duration;
-    console.log("DURATION: " + thisDuration);
-    //$('#duration').innerHTML(thisDuration);
-
 };
+
 function getCurrentTime(){
   currentTime = videoPlayer.currentTime;
   var pointOnProgressBar = (currentTime/thisDuration)*100;
-  /*console.log("Duration: " + thisDuration);*/
   loadingProgress.style.width = pointOnProgressBar+'%';
 }
 
 function togglePlay() {
   if (isPlaying) {
-    videoPlayer.pause()
-    //playButton.innerHTML='Pause';
-    //playButton.style.backgroundColor = '#91D7F3';
+    videoPlayer.pause();
 
   } else {
     videoPlayer.play();
-    //playButton.innerHTML='Play';
-    //playButton.style.backgroundColor = '#C9EAF8';
   }
 };
 videoPlayer.onplaying = function() {
@@ -328,18 +321,8 @@ videoPlayer.onpause = function() {
 };
 
 playButton.onclick = function(){ 
-  /*playButton.find('span').toggleClass('glyphicon-pause glyphicon-play');*/
   $("#start").find('span').toggleClass('glyphicon-pause glyphicon-play');
   togglePlay();
-}
-
-function mouseDown(){
-  /*
-  var x = $(this).find('glyphicon');
-    x.css('font-size','10em');
-    console.log(x);
-    */
-
 }
 
 function toggleMute() {
@@ -368,25 +351,21 @@ volumeDownButton.onclick = function(){
 fullScreenButton.onclick = function(){
   videoPlayer.requestFullscreen();
 }
-//update Progress Bar control
+
 var updateLoadingProgress = function(x) {
     var progress = $('#progressBar');
-    //var maxduration = video[0].duration; //Video duraiton
-    var position = x - progress.offset().left; //Click pos
-    console.log("POSITION: " + position);
+    var position = x - progress.offset().left; 
     var percentage = 100 * position / progress.width();
  
-    //Check within range
     if(percentage > 100) {
         percentage = 100;
     }
     if(percentage < 0) {
         percentage = 0;
     }
- 
-    //Update progress bar and video currenttime
+
     $('#loadingProgress').css('width', percentage+'%');
-    videoPlayer.currentTime = thisDuration * percentage / 100;
+    videoPlayer.currentTime = videoPlayer.duration * percentage / 100;
 };
 
 $(document).mouseup(function(e) {
@@ -396,7 +375,6 @@ $(document).mouseup(function(e) {
     }
 });
 
-//When clicking on progressbar
 $('#progressBar').mousedown(function(e) {
     timeDrag = true;
     console.log(timeDrag);
@@ -408,13 +386,17 @@ $(document).mousemove(function(e) {
     }
 });
 
-/*function clickedButton() {
+videoPlayer.addEventListener('timeupdate', updateCountDown);
+function updateCountDown() {
+    var countDown = document.getElementById('countDown');
+    var timeLeft = videoPlayer.duration - videoPlayer.currentTime;
+    var minutes = Math.floor(timeLeft/60 % 60);
+    var seconds = Math.floor(timeLeft % 60);
+    seconds = seconds.toString();
+    if (seconds.length <2){
+      countDown.innerText = minutes + ":0" + seconds;
+    }
+    else{
+      countDown.innerText = minutes + ":" + seconds;
+    }
 }
-*/
-
-
-
- 
-
-
-
